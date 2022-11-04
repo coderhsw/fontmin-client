@@ -10,7 +10,7 @@
 - 生成字体时生成压缩的文本txt，方便之后迭代压缩的字体文件
 - 支持自定义生成路径
 
-## 开发相关
+## Development
 
 ### Recommended IDE Setup
 
