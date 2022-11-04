@@ -10,6 +10,10 @@
  * @prop ...other 自定义属性
  *
  */
+const statusMap = {
+    1001: '存在同名文件或文件夹，无法覆盖'
+}
+
 export default class Pack {
     constructor(options) {
         if (!options.channel) {
@@ -19,19 +23,18 @@ export default class Pack {
         // 添加默认值
         const _opt = {
             data: null,
-            status: null,
-            statusText: null,
+            status: 0,
             backKey: null,
             sendKey: this.createWaitKey(),
             ...options
         }
 
-        const { channel, data, status, statusText, sendKey, backKey, ...other } = _opt
+        const { channel, data, status, sendKey, backKey, ...other } = _opt
 
         this.channel = channel
         this.data = data
         this.status = status
-        this.statusText = statusText
+        this.statusText = statusMap[status] || ''
         this.sendKey = sendKey
         this.backKey = backKey
         this.other = other

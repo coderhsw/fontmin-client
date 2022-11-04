@@ -68,7 +68,9 @@ export default defineComponent({
             window.api
                 .mixSend('generateCompressedFile', { text: textVal, fontPath: fontFile.path, fontName: fontFile.name })
                 .then((pack) => {
-                    console.log('generateCompressedFile back', pack)
+                    if (pack.body.status !== 0) {
+                        message.error(pack.statusText)
+                    }
                 })
         },
         handleInput(event) {

@@ -71,12 +71,16 @@ export default class font {
 
                 fontmin.run(async (err) => {
                     if (err) {
-                        console.log('fontmin err', err)
+                        console.log('fontmin err', err, err.message)
+
+                        if (err.message.includes('file already exists')) {
+                            this.socket.send('generateCompressedFileBack', { status: 1001, data: { success: false } }, pack)
+                        }
                         return
                     }
 
                     await fsPromise.writeFile(path.join(destPath, 'text.txt'), text, { encoding: 'utf-8' })
-                    this.socket.send('generateCompressedFileBack', { data: { success: true } })
+                    this.socket.send('generateCompressedFileBack', { data: { success: true } }, pack)
                 })
             })
     }
